@@ -2,6 +2,9 @@
     "name": "apantle/fun-php",
     "description": "Functional Programming to enhance OOP PHP developer experience",
     "type": "library",
+    "autoload": {
+        "files": [ "src/functions.php" ]
+    },
     "require-dev": {
         "phpunit/phpunit": "~6.5"
     },
