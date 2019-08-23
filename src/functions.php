@@ -1,5 +1,6 @@
 <?php
 namespace Apantle\FunPHP;
+const _ = 'curryUnaryArg';
 
 function constant($value): callable
 {
@@ -26,4 +27,36 @@ function compose(callable $f, callable $g): callable
     };
 }
 
+function pipe(...$functions): callable
+{
+    return function() use($functions) {
+        $fun_args = func_get_args();
+        $entryFunction = array_shift($functions);
+        return array_reduce(
+          $functions,
+          function($prev, $current_fun) {
+              return call_user_func($current_fun, $prev);
+          },
+          call_user_func_array($entryFunction, $fun_args)
+        );
+    };
+}
 
+function curryToUnary($callableFirst, ...$fun_args): callable
+{
+    if(in_array(_, $fun_args)) {
+
+        return function ($uniqueArg) use ($callableFirst, $fun_args) {
+            $callArgs = array_map(function ($arg) use ($uniqueArg) {
+                return ($arg === _) ? $uniqueArg : $arg;
+            }, $fun_args);
+
+            return call_user_func_array($callableFirst, $callArgs);
+        };
+    }
+
+    return function ($uniqueArgOnRight) use ($callableFirst, $fun_args) {
+        array_push($fun_args, $uniqueArgOnRight);
+        return call_user_func_array( $callableFirst, $fun_args );
+    };
+}
