@@ -8,6 +8,7 @@ use function Apantle\FunPHP\head;
 use function Apantle\FunPHP\compose;
 use function Apantle\FunPHP\constant;
 use function Apantle\FunPHP\curryToUnary;
+use function Apantle\FunPHP\unfold;
 
 class FunctionsTest extends TestCase
 {
@@ -44,6 +45,28 @@ class FunctionsTest extends TestCase
         $actual = $composedFn($list);
 
         $this->assertEquals('A', $actual);
+    }
+
+    public function testComposeUnfold()
+    {
+        $source = [ 1, 2, 3, 4 ];
+        $unfoldOutput = [
+            'sum' => 10,
+            'product' => 24,
+            'reverse' => [4,3,2,1],
+            'concat' => '1,2,3,4'
+        ];
+
+        $expected = json_encode($unfoldOutput);
+
+        $composedEncodeUnfold = compose('json_encode', unfold([
+            'sum' => 'array_sum',
+            'product' => 'array_product',
+            'reverse' => curryToUnary('array_reverse'),
+            'concat' => curryToUnary('implode', ',')
+        ]));
+
+        $this->assertEquals($expected, $composedEncodeUnfold($source));
     }
 
     public function testConstant()
