@@ -6,7 +6,8 @@
         "files": [ "src/functions.php" ]
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.5"
+        "phpunit/phpunit": "~6.5",
+        "apantle/hashmapper": "^1.2"
     },
     "license": "MIT",
     "authors": [

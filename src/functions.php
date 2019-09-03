@@ -60,3 +60,25 @@ function curryToUnary($callableFirst, ...$fun_args): callable
         return call_user_func_array( $callableFirst, $fun_args );
     };
 }
+
+function unfold($specs, $tameme = null): callable
+{
+    return function ($input, $optional = null) use ($specs, $tameme) {
+        $mecapal = [];
+
+        foreach ($specs as $target => $mapper) {
+            $mecapal[$target] = isUnaryFn($mapper)
+                ? call_user_func($mapper, $input)
+                : call_user_func($mapper, $input, $optional, $tameme)
+            ;
+        }
+
+        return $mecapal;
+    };
+}
+
+function isUnaryFn(callable $callable)
+{
+    $reflector = new \ReflectionFunction($callable);
+    return boolval($reflector->getNumberOfParameters() === 1);
+}

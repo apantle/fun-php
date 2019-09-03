@@ -4,9 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ddd73bbfd04de97e6559888d6e614508",
+    "content-hash": "48632613f6fa19d52fca0aa6edd6fe59",
     "packages": [],
     "packages-dev": [
+        {
+            "name": "apantle/hashmapper",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/apantle/hashmapper.git",
+                "reference": "9f9996d2ee5d40cd8d4e0502a7f41b2e14aa82da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/apantle/hashmapper/zipball/9f9996d2ee5d40cd8d4e0502a7f41b2e14aa82da",
+                "reference": "9f9996d2ee5d40cd8d4e0502a7f41b2e14aa82da",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "apantle/fun-php": "~0.2.2",
+                "phpunit/phpunit": "^6||^7"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Apantle\\HashMapper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jesus E. Franco Martinez",
+                    "email": "tezcatl@fedoraproject.org"
+                }
+            ],
+            "description": "Simple Ordered Hashmap Object Transformer (array_map for associative arrays)",
+            "time": "2019-08-23T22:33:27+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.2.0",
